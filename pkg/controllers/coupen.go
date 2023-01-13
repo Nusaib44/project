@@ -5,6 +5,7 @@ import (
 	"project/initializers"
 	"project/pkg/function"
 	"project/pkg/models"
+	"strconv"
 	"time"
 
 	"github.com/gin-gonic/gin"
@@ -70,6 +71,30 @@ func ValidateCoupen(g *gin.Context) {
 
 		initializers.DB.Raw("UPDATE coupens SET is_used=? WHERE id=?", true, coupen.ID).Scan(&coupen)
 		g.JSON(http.StatusOK, "coupen added surcessfully")
+	}
+
+}
+
+func ListCoupon(g *gin.Context) {
+	pagestring := g.Query("page")
+	page, _ := strconv.Atoi(pagestring)
+	offset := (page - 1) * 3
+	var coupon []models.Coupen
+	initializers.DB.Limit(3).Offset(offset).Find(&coupon)
+	g.JSON(http.StatusOK, coupon)
+}
+
+func EditCoupon(g *gin.Context) {
+	var body struct {
+		Code   string
+		Value  int
+		Limit  int64
+		IsUsed bool
+	}
+	if g.Bind(&body) != nil {
+		println("errrrr......not binded")
+		g.JSON(400, gin.H{"error": "failed to load"})
+		return
 	}
 
 }

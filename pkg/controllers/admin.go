@@ -192,7 +192,3 @@ func DeleteCategory(g *gin.Context) {
 }
 
 // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!coupon manangement!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
-func EditCoupon(g *gin.Context) {
-
-}

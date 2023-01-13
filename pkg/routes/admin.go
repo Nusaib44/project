@@ -26,6 +26,8 @@ func AdminRoute(r *gin.Engine) {
 
 	r.POST("/addpayment", middleware.AdminAuth, controllers.AddPaymentMethod)
 	r.POST("/addcoupen", middleware.AdminAuth, controllers.AddCoupen)
+	r.GET("/listcoupon", middleware.AdminAuth, controllers.ListCoupon)
+
 	r.POST("/addproductoffer", middleware.AdminAuth, controllers.AddProductOffer)
 	r.POST("/addcategoryoffer", middleware.AdminAuth, controllers.AddCategoryOffer)
 	r.POST("/return", middleware.RequireAuth, controllers.RetutnOrder)
